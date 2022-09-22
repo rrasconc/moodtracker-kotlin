@@ -12,13 +12,14 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.rrascon.moodpicker.Mood
 import com.rrascon.moodpicker.ui.theme.Lavender
 import com.rrascon.moodpicker.ui.theme.Purple
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
+import java.util.Date
 
 @Composable
-fun MoodItem(mood: Mood) {
+fun MoodItem(mood: Mood, date: Date) {
     Box(modifier = Modifier
         .clip(RoundedCornerShape(8.dp))
         .background(Color.White)
@@ -42,8 +43,9 @@ fun MoodItem(mood: Mood) {
                     color = Purple,
                 )
             }
-            Text(text = "20 Sep, 2022 at 3:44pm",
+            Text(text = java.text.SimpleDateFormat("dd MMM, yyy hh:mm a", java.util.Locale.getDefault()).format(date),
                 color = Lavender,
+                fontSize = 14.sp
             )
             Text(text = "Delete",
                 fontWeight = FontWeight.Bold,
