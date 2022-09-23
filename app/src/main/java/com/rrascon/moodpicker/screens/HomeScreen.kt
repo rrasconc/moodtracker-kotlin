@@ -89,7 +89,7 @@ fun HomeScreen(props: DataManager) {
                      Box(modifier = Modifier
                          .clip(RoundedCornerShape(24.dp))
                          .clickable {
-                             props.addMoodRecord(selectedMood.value)
+                             props.addMoodRecord(MoodRecord(mood= selectedMood.value, date= Date()))
                          }
                          .background(Purple)
                          .padding(horizontal = 24.dp, vertical = 8.dp)
@@ -109,14 +109,14 @@ fun HomeScreen(props: DataManager) {
         )
         Spacer(modifier = Modifier.height(16.dp))
         Column() {
-//            props.moodRecords.forEach {
-//                MoodItem(mood = Mood(it.mood.name, it.mood.emoji), date = it.date)
-//                Spacer(modifier = Modifier.height(8.dp))
-//            }
             if(props.moodRecords.isNotEmpty()){
                 val lastIndex = props.moodRecords.lastIndex
-                MoodItem(mood = Mood(props.moodRecords[lastIndex].mood.name, props.moodRecords[lastIndex].mood.emoji),
-                    date = props.moodRecords[lastIndex].date)
+                val lastRecord = props.moodRecords[lastIndex]
+
+                MoodItem(moodRecord = MoodRecord(Mood(lastRecord.mood.name, lastRecord.mood.emoji),
+                    date = lastRecord.date) ,
+                    onDelete = {})
+
             }
 
         }

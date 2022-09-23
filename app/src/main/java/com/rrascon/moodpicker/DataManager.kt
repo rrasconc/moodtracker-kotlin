@@ -16,8 +16,15 @@ class DataManager(app: Application) : AndroidViewModel(app) {
 
     var moodRecords: List<MoodRecord> by mutableStateOf(listOf())
 
-    fun addMoodRecord(mood: Mood) {
-        moodRecords = listOf(*moodRecords.toTypedArray(), MoodRecord(mood, Date()))
+    fun addMoodRecord(record: MoodRecord) {
+        moodRecords = listOf(*moodRecords.toTypedArray(), record)
+    }
+
+    fun removeMoodRecord(record: MoodRecord) {
+        val filteredList = moodRecords.filter {
+            it.date !== record.date
+        }
+        moodRecords = listOf(*filteredList.toTypedArray())
     }
 
 }
